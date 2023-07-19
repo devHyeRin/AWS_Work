@@ -1,0 +1,29 @@
+buildscript {   // plugin 부분
+    ext {
+        springBootVersion = '2.1.7.RELEASE'
+    }
+    repositories {
+        mavenCentral()    // 메이븐 가져오
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+group 'com.mega.it'     // url과 같음
+version '1.0.4-SNAPSHOT-'+new Date().format("yyyyMMddHHmmss")
+sourceCompatibility = 1.8     // 자바 8버전 이상
+
+repositories {
+    mavenCentral()
+}
+
+//여기 부분이 중요 : 의존성 추가
+dependencies {
+    implementation('org.springframework.boot:spring-boot-starter-web')      // web 의존성
+    testImplementation('org.springframework.boot:spring-boot-starter-test')   // test 의존성
+}
