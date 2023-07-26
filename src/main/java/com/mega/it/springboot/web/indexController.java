@@ -1,5 +1,6 @@
 package com.mega.it.springboot.web;
 
+import com.mega.it.springboot.config.auth.LoginUser;
 import com.mega.it.springboot.config.auth.dto.SessionUser;
 import com.mega.it.springboot.service.posts.PostsService;
 import com.mega.it.springboot.web.dto.PostsResponseDto;
@@ -19,9 +20,9 @@ public class indexController {
     private final HttpSession httpSession;
 
     @GetMapping(value = "/")
-    public String index(Model model){
+    public String index(Model model, @LoginUser SessionUser user){
         model.addAttribute("posts", postsService.findAllDesc());
-        SessionUser user = (SessionUser) httpSession.getAttribute("user");
+//        SessionUser user = (SessionUser) httpSession.getAttribute("user");    // 위에 sessionuser 어노테이션 처리했기 때문에 주석처리
         if(user != null){
             model.addAttribute("userName1", user.getName());
         }
